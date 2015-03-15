@@ -18,8 +18,8 @@ require(gridExtra)
 ```
 
 ```{r global_options, include=FALSE}
-knitr::opts_chunk$set(fig.width = 7, fig.height = 3.5, fig.path='Figures/',
-                      echo=FALSE, warnings = FALSE, message = FALSE)
+knitr::opts_chunk$set(fig.width = 7, fig.height = 3.5, fig.path='Figures/', 
+                      message = FALSE)
 ```
 
 Set the working directory (**should be customised by the user**) and read the
@@ -41,7 +41,7 @@ inputdf <-
 
 ## What is mean total number of steps taken per day?
 
-Calculate and graph the total steps walked during each day and make a histogram:
+Calculate the total steps walked during each day and make a histogram:
 ```{r}
 totalStepsByDay <-
         inputdf %>%
@@ -54,7 +54,7 @@ totalStepsByDay <-
 plot1 <- ggplot(totalStepsByDay, aes(x = steps)) + 
         geom_histogram(alpha = 0.8, stat = "bin", binwidth = 1000) +
         theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-        theme(text = element_text(size = 9))
+        theme(text = element_text(size = 10))
 plot1
 ```
 
@@ -131,8 +131,8 @@ inputdfCorrected %>%
         summarise(count = n())
 ```
 
-Calculate and graph the total steps walked during each day after imputing 
-the missing values:
+Calculate the total steps walked during each day after imputing the missing 
+values:
 ```{r}
 totalStepsByDayCorrected <-
         inputdfCorrected %>%
@@ -153,8 +153,8 @@ totalStepsByDayCorrected %>%
         summarise(steps = mean(steps, na.rm = TRUE))
 ```
 
-Calculate and plot the mean steps walked during each interval over the 
-whole period after imputing missing values:
+Calculate the mean steps walked during each interval over the whole period after
+imputing missing values:
 ```{r}
 totalStepsByIntervalCorrected <-
         inputdf %>%
@@ -166,8 +166,8 @@ totalStepsByIntervalCorrected <-
 
 ```
 
-Join original and imputed tables for convenient graphing in one plot and see the
-comparison on the plot:
+Join original and imputed tables for convenient graphing and see the
+comparisons on the plots:
 ```{r}
 totalStepsByDayComparison <- rbind(totalStepsByDay, totalStepsByDayCorrected)
 totalStepsByDayComparison$Imputed <- 
@@ -186,14 +186,21 @@ totalStepsByIntervalComparison$Imputed <-
 
 ```
 
+Histograms of steps walked during each day before and after imputing the missing
+values:  
 ```{r echo = FALSE}
 plot3 <- ggplot(totalStepsByDayComparison, aes(x = steps, fill = Imputed)) + 
         geom_histogram(alpha = 0.8, stat = "bin", binwidth = 1000, 
                        position = "dodge") +
         theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-        theme(text = element_text(size = 9))
+        theme(text = element_text(size = 10))
 plot3
 
+```
+
+Mean steps walked during each interval over the whole period before and after 
+imputing the missing values:          
+```{r echo = FALSE}
 plot4 <- ggplot(totalStepsByIntervalComparison, 
                 aes(x = interval, y = steps, group = Imputed, fill = Imputed)) + 
         geom_area(alpha = 0.5, position = "dodge") + 
@@ -248,6 +255,6 @@ plot5
 
 ```
 
-```{r}
+```{r echo = FALSE}
 setwd(wd)
 ```
