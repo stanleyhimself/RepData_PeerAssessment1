@@ -1,4 +1,4 @@
 # RepData_PeerAssessment1
 Peer Assessment 1 for Reproducible Research
 
-Please see the .md or .pdf files for details.
+Please see the PA1_template.md or PA1_template.pdf file for details.
